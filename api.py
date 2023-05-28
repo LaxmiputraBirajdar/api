@@ -26,9 +26,14 @@ def dosomething(symptom):
     user_input_label = np.array(user_input_label)
     user_input_label = user_input_label.reshape((-1,1)).transpose()
     return(dt.predict(user_input_label))
+
+
 @app.route('/')
 def home():
     return "hello"
+
+
+
 
 @app.route('/predict',methods=['POST'])
 def predict():
@@ -41,6 +46,6 @@ def predict():
     x = dosomething([s1,s2,s3,s4,s5])
     r=x[0]
 
-    return jsonify(r)
+    return jsonify({'disease':r})
 if __name__ == '__main__':
     app.run(debug=True)
